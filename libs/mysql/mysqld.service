@@ -1,0 +1,31 @@
+[Unit]
+Documentation=man:systemd-sysv-generator(8)
+SourcePath=/etc/rc.d/init.d/mysqld
+Description=LSB: start and stop MySQL
+Before=runlevel2.target
+Before=runlevel3.target
+Before=runlevel4.target
+Before=runlevel5.target
+Before=shutdown.target
+After=network-online.target
+After=remote-fs.target
+After=ypbind.service
+After=nscd.service
+After=ldap.service
+After=ntpd.service
+After=xntpd.service
+After=network-online.target
+Wants=network-online.target
+Conflicts=shutdown.target
+
+[Service]
+Type=forking
+Restart=no
+TimeoutSec=5min
+IgnoreSIGPIPE=no
+KillMode=process
+GuessMainPID=no
+RemainAfterExit=yes
+ExecStart=/etc/rc.d/init.d/mysqld start
+ExecStop=/etc/rc.d/init.d/mysqld stop
+ExecReload=/etc/rc.d/init.d/mysqld reload

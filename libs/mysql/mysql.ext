@@ -1,0 +1,32 @@
+#!/opt/expect/bin/expect
+
+# 获取密码传参
+set passwd [lindex $argv 0]
+set setPasswd [lindex $argv 1]
+# 开启交互进程
+
+spawn mysql_secure_installation
+expect "Enter password for user root:"
+send "$passwd\r"
+expect "New password:"
+send "$setPasswd\r"
+expect "Re-enter new password:"
+send "$setPasswd\r"
+expect "y|Y"
+send "n\r"
+expect "y|Y"
+send "y\r"
+expect "New password:"
+send "$setPasswd\r"
+expect "Re-enter new password:"
+send "$setPasswd\r"
+expect "y|Y"
+send "y\r"
+expect "y|Y"
+send "y\r"
+expect "y|Y"
+send "y\r"
+expect "y|Y"
+send "y\r"
+#interact
+expect eof
