@@ -29,6 +29,12 @@ function getPasswd(){
 
 }
 
+# 赋予 sh,ext文件执行权限
+shExt=$(find ./ -regextype posix-extended -regex ".*.(sh|ext)$");
+for i in $shExt
+do
+	chmod u+x $i
+done
 
 # 获取压缩包的路径
 baseDir=$(pwd)
