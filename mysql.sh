@@ -58,7 +58,11 @@ mysql_tar=$(find $baseDir -regex ".*/source/mysql/mysql.*.tar.gz")
 if [[ -z $mysql_tar ]]
 then
 	wget -p ./source/mysql https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.30-linux-glibc2.12-x86_64.tar.gz
-	mysql_tar=$(find $baseDir -regex ".*/source/mysql/mysql.*.tar.gz")
+	mysql_tar=$(find $baseDir -regex ".*mysql.*.tar.gz")
+	if [[ -z $mysql_tar ]]
+	then
+		echo "找不到mysql源码包"
+	fi
 fi
 
 # 选择mysql压缩包
