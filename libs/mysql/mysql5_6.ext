@@ -1,0 +1,31 @@
+#!/usr/local/expect/bin/expect
+
+# 获取密码传参
+set passwd [lindex $argv 0]
+set setPasswd [lindex $argv 1]
+# 开启交互进程
+
+spawn mysql_secure_installation
+expect -re ".*password.*root.*:"
+send "$passwd\r"
+# Set root password?
+expect "Y/n"
+send "y\r"
+expect "New password:"
+send "$setPasswd\r"
+expect "Re-enter new password:"
+send "$setPasswd\r"
+# Remove anonymous users?
+expect "Y/n"
+send "y\r"
+# Disallow root login remotely?
+expect "Y/n"
+send "y\r"
+# Remove test database and access to it?
+expect "Y/n"
+send "y\r"
+# Reload privilege tables now?
+expect "Y/n"
+send "y\r"
+#interact
+expect eof

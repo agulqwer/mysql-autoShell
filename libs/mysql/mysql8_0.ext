@@ -1,0 +1,38 @@
+#!/usr/local/expect/bin/expect
+
+# 获取密码传参
+set passwd [lindex $argv 0]
+set setPasswd [lindex $argv 1]
+# 开启交互进程
+
+spawn mysql_secure_installation
+expect -re ".*password.*root.*:"
+send "$passwd\r"
+expect "New password:"
+send "$setPasswd\r"
+expect "Re-enter new password:"
+send "$setPasswd\r"
+# Would you like to setup VALIDATE PASSWORD plugin?
+expect -re ".*Press y|Y for Yes, any other key for No.*"
+send "n\r"
+# Change the password for root ?
+expect -re ".*Press y|Y for Yes, any other key for No.*"
+send "y\r"
+expect "New password:"
+send "$setPasswd\r"
+expect "Re-enter new password:"
+send "$setPasswd\r"
+# Remove anonymous users?
+expect -re ".*Press y|Y for Yes, any other key for No.*"
+send "y\r"
+# Disallow root login remotely
+expect -re ".*Press y|Y for Yes, any other key for No.*"
+send "y\r"
+# Remove test database and access to it?
+expect -re ".*Press y|Y for Yes, any other key for No.*"
+send "y\r"
+# Reload privilege tables now?
+expect -re ".*Press y|Y for Yes, any other key for No.*"
+send "y\r"
+#interact
+expect eof
