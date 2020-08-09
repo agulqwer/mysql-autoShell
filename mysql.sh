@@ -196,7 +196,7 @@ fi
 
 
 # 检查并安装依赖
-./libs/deps.sh "$baseDir" "$prefixDir"
+bash $baseDir"/libs/deps.sh" "$baseDir" "$prefixDir"
 
 # 创建mysql用户、用户组
 groupadd mysql
