@@ -45,9 +45,12 @@ do
 	chmod u+x $i
 done
 
-
 # 获取压缩包的路径
 baseDir=$(pwd)
+
+# 删除tar目录下解压文件
+rm $baseDir"/tar/*" -rf
+
 echo "---------------------------"
 echo "---------------------------"
 echo "输入安装路径"
