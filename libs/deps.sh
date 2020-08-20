@@ -27,7 +27,7 @@ deps=(gcc gcc-c++ cmake openssl openssl-devel ncurses-devel autoconf)
 #遍历安装依赖
 for dep in ${deps[@]}
 do
-  if [[ -z $(command -v $dep) ]]
+  if [[ -z $(rpm -qa| grep $dep) ]] || [[ -z $(command -v $dep) ]]
   then   
     yum install -y $dep
     if [[ $? != 0 ]]
@@ -41,5 +41,5 @@ done
 # 检测是否安装了expect
 if [[ -z $(command -v expect)  ]]
 then
-    bash $baseDir"/libs/expect/expect.sh" "$baseDir" "$prefixDir"    
+    source $baseDir"/libs/expect/expect.sh" "$baseDir" "$prefixDir"    
 fi
